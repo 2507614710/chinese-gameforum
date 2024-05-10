@@ -1,0 +1,41 @@
+/* 游戏详情页面样式 */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.game-detail {
+  background-color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-detail h1 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.game-detail img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.game-detail p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 额外的响应式设计，以确保在不同设备上都能良好展示 */
+@media (max-width: 768px) {
+  .game-detail {
+    margin: 10px;
+  }
+}

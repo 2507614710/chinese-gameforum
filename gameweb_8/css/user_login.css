@@ -1,0 +1,128 @@
+/* 基础重置 */
+body, h1, p {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif; /* 推荐使用未来感强烈的字体，例如Orbitron */
+}
+
+/* 背景和全局样式 */
+body {
+  background: radial-gradient(circle, rgba(18,18,18,1) 0%, rgba(5,1,27,1) 100%);
+  color: #fff;
+}
+
+/* 头部样式，使用霓虹效果 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #000; /* 深色背景 */
+  border-bottom: 1px solid #2e2e2e; /* 赛博朋克风常用细节 */
+  text-align: center; /* 居中显示logo等 */
+}
+
+.header h1 {
+  color: #0ff; /* 霓虹蓝 */
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+  font-size: 2rem; /* 标题字号增大 */
+}
+
+/* 新增: 用户登录链接样式 */
+.login-link {
+  color: #0ff; /* 使用霓虹蓝 */
+  text-decoration: none; /* 去掉下划线 */
+  margin-right: auto; /* 自动调整右边距，确保logo居中 */
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+  font-size: 2rem; /* 标题字号增大 */
+}
+
+/* 新增: 用户注册链接样式 */
+.register-link {
+  color: #ff00ff; /* 使用霓虹粉，与登录按钮区分 */
+  text-decoration: none; /* 去掉下划线 */
+  margin-left: auto; /* 自动调整左边距，确保logo居中 */
+  text-shadow: 0 0 5px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff, 0 0 35px #ff00ff;
+  font-size: 2rem; /* 标题字号增大 */
+}
+
+.logo {
+  flex-grow: 1; /* 让logo保持在中间 */
+  text-align: center; /* 确保图片中心对齐，尽管它已经设置为flex item */
+}
+
+.logo img {
+  margin: 0 auto; /* 图片居中 */
+  width: 160px;
+  filter: hue-rotate(200deg) brightness(150%);
+}
+
+/* 登录表单区域调整 */
+.login-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.login-form {
+  width: 100%; /* 输入区域最大化 */
+  max-width: 500px; /* 最大宽度调整 */
+  background: #121212; /* 暗背景 */
+  padding: 40px; /* 内边距增加，提高输入区域大小 */
+  border-radius: 15px; /* 边角圆润 */
+  box-shadow: 0 0 20px rgba(0, 255, 255, .5); /* 霓虹蓝边框阴影 */
+}
+
+.form-item {
+  margin-bottom: 20px; /* 间距调整，确保对齐 */
+}
+
+.form-item label {
+  display: block; /* 使标签块状化，保证对齐 */
+  color: #0ff; /* 霓虹蓝 */
+  margin-bottom: 10px; /* 标签底部间距 */
+}
+
+.login-form input {
+  width: 100%; /* 宽度最大化，保证对齐 */
+  padding: 10px 15px; /* 增加内边距，方便输入 */
+  background: none;
+  color: #0ff; /* 霓虹蓝输入 */
+  border: 1px solid #0ff; /* 霓虹蓝边框 */
+  border-radius: 5px; /* 输入框边角圆润 */
+}
+
+.login-button {
+  width: 100%; /* 按钮宽度最大化 */
+  padding: 10px 0; /* 增加垂直内边距 */
+  background-color: #ff00ff; /* 霓虹粉 */
+  border: none;
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; /* 按钮阴影 */
+  border-radius: 5px; /* 按钮边角圆润 */
+}
+
+/* 页脚样式改进 */
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #000; /* 页脚黑色背景 */
+  border-top: 1px solid #2e2e2e; /* 页脚顶部边框 */
+}
+
+/* 自定义警告框样式调整 */
+#customAlert {
+  position: fixed; /* 固定定位 */
+  top: 10%; /* 顶部距离 */
+  left: 50%; /* 左边距离 */
+  transform: translateX(-50%); /* 水平中心对齐 */
+  min-width: 300px; /* 最小宽度 */
+  padding: 20px; /* 内边距 */
+  border: 1px solid #ff00ff; /* 霓虹粉边框 */
+  background-color: #121212; /* 暗背景 */
+  color: #0ff; /* 霓虹蓝文本 */
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; /* 边框阴影 */
+  text-align: center; /* 文本居中 */
+  border-radius: 15px; /* 边角圆润 */
+  z-index: 999; /* 确保在顶层 */
+}

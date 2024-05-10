@@ -1,0 +1,103 @@
+/* 基础样式重置 */
+body, h1, p {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif; /* 使用未来感强烈的Orbitron字体 */
+}
+
+/* 背景和全局样式 */
+body {
+  background: radial-gradient(circle, rgba(18,18,18,1) 0%, rgba(5,1,27,1) 100%);
+  color: #fff;
+}
+
+/* 头部样式，采用霓虹效果 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #000; /* 深色背景 */
+  border-bottom: 1px solid #2e2e2e; /* 添加细边框增强赛博朋克风格 */
+}
+
+.header h1 {
+  color: #0ff; /* 使用霓虹蓝颜色 */
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff; /* 给文字加上霓虹光晕 */
+}
+
+
+.logo img {
+  width: 160px;
+  filter: hue-rotate(200deg) brightness(150%); /* 对Logo图标进行色彩调整 */
+}
+
+/* 注册表单区域样式 */
+.login-section { /* 该类别用于登录也同样适用于注册表单区域 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 500px;
+  background: #121212; /* 暗背景色 */
+  padding: 40px;
+  border-radius: 15px; /* 圆角边框 */
+  box-shadow: 0 0 20px rgba(0, 255, 255, .5); /* 边缘发光阴影 */
+}
+
+.form-item {
+  margin-bottom: 20px; /* 每一项输入框底部留有空隙 */
+}
+
+.form-item label {
+  display: block; /* 使标签块状，方便布局 */
+  color: #0ff; /* 标签使用霓虹蓝颜色 */
+  margin-bottom: 10px; /* 标签与输入框之间留有空隙 */
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px 15px;
+  background: none;
+  color: #0ff; /* 输入文字为霓虹蓝 */
+  border: 1px solid #0ff; /* 边框颜色 */
+  border-radius: 5px; /* 输入框圆角样式 */
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #ff00ff; /* 霓虹粉色背景 */
+  border: none;
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; /* 按钮阴影 */
+  border-radius: 5px; /* 按钮圆角 */
+}
+
+/* 页脚样式 */
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #000;
+  border-top: 1px solid #2e2e2e;
+}
+
+/* 自定义警告框样式 */
+#customAlert {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 300px;
+  padding: 20px;
+  border: 1px solid #ff00ff;
+  background-color: #121212; /* 背景色 */
+  color: #0ff; /* 文本颜色 */
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+  text-align: center;
+  border-radius: 15px;
+  z-index: 999;
+}

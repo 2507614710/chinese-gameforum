@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录页面</title>
+  <link rel="stylesheet" href="./css/user_login.css">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+  <a href="user_login.html" class="login-link">用户登录</a>
+  <div class="logo">
+    <img src="./img/logo.png" alt="Logo">
+  </div>
+  <a href="./user register.html" class="register-link">用户注册</a>
+</header>
+
+    <div id="customAlert" style="display: none; position: fixed; right: 20px; background-color: #f44336; color: white; padding: 20px; border-radius: 5px;">
+    </div>
+
+    <section class="login-section">
+      <form class="login-form" @submit.prevent="handleLogin">
+        <div class="form-item">
+          <label for="userid">用户ID:</label>
+          <input type="text" id="userid" v-model="loginForm.userid" required>
+        </div>
+        <div class="form-item">
+          <label for="password">密码:</label>
+          <input type="password" id="password" v-model="loginForm.password" required>
+        </div>
+        <button type="submit" class="login-button">登录</button>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p>版权所有 &copy; 2023 中文游戏论坛. 保留所有权利。</p>
+    </footer>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        loginForm: {
+          userid: '',
+          password: ''
+        }
+      },
+       methods: {
+          handleLogin() {
+            fetch('http://127.0.0.1:5000/user_login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(this.loginForm),  // 将登录表单数据转换为JSON字符串
+              credentials: 'include'  // 发送请求时带上cookie
+            })
+            .then(response => {
+              if (response.ok) {
+                return response.json();  // 解析JSON数据
+              } else {
+                throw new Error('账号或密码错误');  // 如果响应不是ok，则抛出错误
+              }
+            })
+            .then(responseJson => {
+              this.showCustomAlert('登录成功: ' + responseJson.message);  // 显示成功消息
+              window.location.href = 'forum.html';  // 登录成功后跳转到论坛页面
+            })
+            .catch(error => {
+              this.showCustomAlert('登录失败: ' + error.message);  // 显示失败消息
+            });
+          },
+          showCustomAlert(message) {
+            const alertBox = document.getElementById('customAlert');
+            alertBox.style.display = 'block';
+            alertBox.textContent = message;
+            setTimeout(() => {
+              alertBox.style.display = 'none';
+            }, 3000);
+          }
+        },
+    });
+  </script>
+</body>
+</html>

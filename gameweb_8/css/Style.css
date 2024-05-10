@@ -1,0 +1,131 @@
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+/* 头部样式 */
+/* 头部样式 */
+.header {
+  background-color: #333;
+  color: #f4f07e;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  /* 保持logo样式不变 */
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 80px; /* Logo图片高度 */
+  width: 100px;
+}
+
+.title-container {
+  /* 为title-container添加flex布局，使其子元素垂直堆叠 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.title-container h1 {
+  margin: 0 0 5px 0; /* 在标题和网址之间添加一些间隔 */
+  font-size: 2rem; /* 标题字号 */
+}
+
+.website-url {
+  color: #999;
+  font-size: 0.8rem; /* 降低网址字号 */
+  align-self: flex-start; /* 网址向左对齐 */
+}
+
+.top-nav {
+  /* top-nav保持大小不变 */
+  display: flex;
+  align-items: center;
+}
+
+.top-nav a {
+  color: #f4f07e;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+
+/* 广告位样式 */
+.banner-ads img {
+  width: 100%;
+  height: auto;
+}
+
+/* 游戏推荐样式 */
+.game-recommendation {
+  padding: 20px;
+}
+
+.game-recommendation h2 {
+  font-size: 1.5rem; /* 推荐标题字号 */
+}
+
+.game-item {
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.post-item{
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+/* 最新发布板块 */
+.latest-posts{
+  margin-bottom: 60px;
+}
+
+.item-header h3 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+}
+
+.item-content img {
+  max-width: 200px; /* 限制游戏图片宽度 */
+  height: auto; /* 图片高度自适应 */
+  margin-right: 15px;
+}
+
+.item-description {
+  flex-grow: 1;
+}
+
+.item-description p {
+  color: #666;
+}
+
+/* 页脚样式 */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注册页面</title>
+  <link rel="stylesheet" href="./css/user_register.css"> <!-- 使用相似的CSS样式 -->
+  <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="logo">
+        <img src="./img/logo.png" alt="Logo">
+      </div>
+      <h1>用户注册</h1>
+    </header>
+
+    <div id="customAlert" style="display: none; position: fixed; right: 20px; background-color: #f44336; color: white; padding: 20px; border-radius: 5px;">
+    </div>
+
+    <section class="login-section"> <!-- 登录改为注册 -->
+      <form class="login-form" @submit.prevent="handleRegister">
+        <div class="form-item">
+          <label for="userid">用户ID:</label>
+          <input type="text" id="userid" v-model="registerForm.userid" required>
+        </div>
+        <div class="form-item">
+          <label for="password">密码:</label>
+          <input type="password" id="password" v-model="registerForm.password" required>
+        </div>
+        <button type="submit" class="login-button">注册</button> <!-- 登录改为注册 -->
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p>版权所有 &copy; 2023 中文游戏论坛. 保留所有权利。</p>
+    </footer>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        registerForm: {
+          userid: '',
+          password: ''
+        }
+      },
+      methods: {
+        handleRegister() {
+          fetch('http://127.0.0.1:5000/user_register', { // 指向/user_register端点
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.registerForm),
+            credentials: 'include'
+          })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('注册失败');
+            }
+          })
+          .then(responseJson => {
+            this.showCustomAlert('注册成功, 即将跳转登录页面...'); // 临时消息通知
+            setTimeout(() => {
+              window.location.href = './user_login.html'; // 自动跳转到登录页面
+            }, 3000);
+          })
+          .catch(error => {
+            this.showCustomAlert('注册失败: ' + error.message);
+          });
+        },
+        showCustomAlert(message) {
+          const alertBox = document.getElementById('customAlert');
+          alertBox.style.display = 'block';
+          alertBox.textContent = message;
+          setTimeout(() => {
+            alertBox.style.display = 'none';
+          }, 3000);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

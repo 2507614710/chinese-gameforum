@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>前端登录测试</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<h2>登录测试表单</h2>
+
+<form id="loginForm">
+    用户名：<input type="text" id="userid"><br>
+    密码：<input type="password" id="password"><br>
+    <button type="button" onclick="submitLogin()">登录</button>
+</form>
+
+<script>
+    function submitLogin() {
+        var userid = document.getElementById('userid').value;
+        var password = document.getElementById('password').value;
+
+        axios.post('http://127.0.0.1:5000/user_login', {
+            userid: userid,
+            password: password
+        })
+        .then(function (response) {
+            console.log("登录成功:", response.data);
+            // 处理成功的响应
+        })
+        .catch(function (error) {
+            console.log("登录失败:", error);
+            // 处理错误
+        });
+    }
+</script>
+
+</body>
+</html>

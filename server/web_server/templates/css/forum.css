@@ -1,0 +1,52 @@
+/* 导入首页的样式 */
+@import "./Style.css";
+
+/* 论坛分类板块样式 */
+/* 论坛分类板块样式 */
+.forum-categories {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #f5f5f5; /* 给板块添加淡灰色背景 */
+}
+
+.category-item {
+  padding: 30px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  flex-basis: calc(33.3333% - 20px); /* 每个项目占行宽的1/3 减去margin */
+  text-align: center;
+  background-color: #ffffff; /* 分类项目背景色为纯白 */
+  border-radius: 20px; /* 轻微的圆角会显得更加精致 */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08); /* 优化了阴影效果，看起来更加柔和 */
+  transition: box-shadow 0.3s ease-in-out; /* 过渡效果更加平滑 */
+}
+
+.category-item:hover {
+  box-shadow: 0 8px 12px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.1); /* 鼠标悬停时阴影更大，更柔和 */
+}
+
+.category-item img {
+  width: 70%; /* 使图片不会超出 .category-item 宽度 */
+  height: 200px;
+  margin-bottom: 5px;
+  border-radius: 100px; /* 图片添加轻微圆角 */
+}
+
+/* 可以为标题或文本添加颜色以突出或统一品牌色彩 */
+.category-item h3 {
+  color: #333; /* 暗色更易于阅读 */
+  margin-bottom: 15px; /* 增加底部空间 */
+}
+
+/* 链接样式 */
+a {
+  color: #0066cc; /* 增加链接的识别度 */
+  text-decoration: none; /* 移除下划线 */
+}
+
+a:hover {
+  text-decoration: underline; /* 添加下划线以表示可点击 */
+}
+

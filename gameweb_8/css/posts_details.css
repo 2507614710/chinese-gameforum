@@ -1,0 +1,27 @@
+.post-detail {
+  margin: 20px auto;
+  width: 80%;
+  padding: 20px;
+  box-shadow: 0px 0px 10px #ccc;
+}
+
+.post-detail h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.post-detail img {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.post-detail p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.post-author, .post-date {
+  font-size: 14px;
+  color: #888;
+}

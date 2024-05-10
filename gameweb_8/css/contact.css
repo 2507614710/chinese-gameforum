@@ -1,0 +1,23 @@
+/* 导入首页的样式 */
+@import "./Style.css";
+
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+/* ...省略其他样式... */
+
+/* 团队信息展示样式 */
+.team-info {
+  padding: 20px;
+  text-align: center;
+}
+
+/* 可以根据实际布局需求添加更多的样式 */

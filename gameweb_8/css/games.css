@@ -1,0 +1,105 @@
+/* 导入首页的样式 */
+@import "./Style.css";
+
+/* Style.css继承的基础样式保持不变 */
+
+/* 游戏板块展示区调整 */
+.game-boards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #f0ebe5; /* 淡米色背景，提供古典氛围 */
+}
+
+.board-item {
+  width: calc(33.333% - 40px); /* 精确计算每列平均宽度，减去间距 */
+  margin: 20px; /* 上下左右留出间距 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 设置较小的阴影 */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 平滑过渡效果 */
+  border-radius: 10px; /* 设置圆角效果 */
+  overflow: hidden; /* 超出部分隐藏，使得border-radius生效 */
+}
+
+.board-item:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* 鼠标悬浮时加重阴影 */
+  transform: translateY(-3px); /* 轻微上移，突出选中效果 */
+}
+
+.board-item a {
+  color: #333; /* 统一文字颜色 */
+  text-decoration: none; /* 去除下划线 */
+  display: block; /* 使得a标签块状化以覆盖整个board-item */
+}
+
+.board-item img {
+  width: 100%; /* 图片宽度自适应容器 */    /*width: 268px;*/
+  height: 164px; /* 保持图片原比例 */
+  border-bottom: 4px solid #deb887; /* 图片下方边框，增加艺术感 */
+  /* 调整图片大小使其和文字大小相一致 */
+  display: block;
+}
+
+.board-item h3 {
+  text-align: center; /* 游戏名称居中显示 */
+  padding: 10px 0; /* 上下内边距，左右无边距 */
+  background-color: #fff; /* 白色背景突出文字 */
+  font-family: 'Times New Roman', Times, serif; /* 使用更为经典的字体 */
+  font-size: 18px; /* 设定字体大小 */
+  color: #5b3a29; /* 深褐色字体，提升文艺复兴风情 */
+  margin: 0; /* 重置外边距 */
+}
+
+/* 调整页脚样式 */
+.footer {
+  position: relative; /* 底部页脚固定定位 */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 页脚上方阴影 */
+}
+
+/* 轮播图样式 */
+.carousel {
+  width: 100%;
+  /* max-width: 800px; */
+  /* margin: 0 auto 20px; */
+  position: relative;
+}
+
+.carousel-container {
+  position: relative;
+}
+
+.carousel-image {
+  width: 100%; /*宽度自适应容器*/
+  height: 400px; /*高度自动*/
+  /* border-radius: 10px; 可选，如果需要圆角 */
+  /* 确保图片始终能完全覆盖轮播图区域 */
+  text-align: center;
+  object-fit: cover;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.carousel-control {
+  pointer-events: all;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.carousel-control.left {
+  border-radius: 3px 0 0 3px;
+}
+
+.carousel-control.right {
+  border-radius: 0 3px 3px 0;
+}

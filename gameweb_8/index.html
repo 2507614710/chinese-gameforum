@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>游戏社区论坛</title>
+  <link rel="stylesheet" href="./css/Style.css">
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 头部区域 -->
+    <header class="header">
+      <div class="logo">
+        <img src="./img/logo.png" alt="Logo">
+      </div>
+      <div class="title-container">
+        <h1>游戏社区论坛</h1>
+        <span class="website-url">www.gamelogin.com</span>
+      </div>
+      <nav class="top-nav">
+        <a href="index.html">首页</a>
+        <a href="games.html">游戏</a>
+        <a href="forum.html">论坛</a>
+        <a href="user_login.html">登录</a>
+        <a href="contact.html">联系我们</a>
+      </nav>
+    </header>
+
+    <!-- 广告位区域 -->
+    <section class="banner-ads">
+      <img src="banner-ad-placeholder.png" alt="广告位">
+    </section>
+
+    <!-- 游戏推荐区 -->
+    <section class="game-recommendation">
+      <h2>游戏推荐</h2>
+      <!-- 在游戏推荐区域的循环中，为每个游戏项添加一个链接(a标签) -->
+    <div class="game-item" v-for="game in games" :key="game.id">
+      <div class="item-header">
+        <h3>{{ game.name }}</h3>
+      </div>
+      <div class="item-content">
+        <!-- 添加带有游戏ID参数的链接到game_details.html -->
+        <a :href="`game_details.html?id=${game.id}`">
+          <img :src="game.img" :alt="game.name">
+        </a>
+        <div class="item-description">
+          <p>{{ game.description }}</p>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- 最新发布区 -->
+    <section class="latest-posts">
+      <h2>最新发布</h2>
+      <div class="post-item" v-for="post in posts" :key="post.id">
+        <div class="item-header">
+          <h3>{{ post.title }}</h3>
+        </div>
+        <div class="item-content">
+          <!-- 更新为点击导航到帖子详情页面 -->
+          <a :href="`posts_details.html?id=${post.id}`">
+            <img :src="post.img" :alt="post.title">
+          </a>
+          <div class="item-description">
+            <p>{{ post.content }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚区 -->
+    <footer class="footer">
+      <p>版权所有 &copy; 2023 中文游戏论坛. 保留所有权利。</p>
+    </footer>
+  </div>
+
+  <script>
+    // Vue代码
+    new Vue({
+      el: '#app',
+      data: {
+        games: [],
+        posts: []
+      },
+      mounted() {
+        // 请求游戏数据
+        fetch('http://localhost:5000/games')
+          .then(response => response.json())
+          .then(data => {
+            this.games = data;
+          }).catch(error => {
+            console.error('获取游戏数据失败:', error);
+          });
+
+        // 请求帖子数据
+        fetch('http://localhost:5000/posts')
+          .then(response => response.json())
+          .then(data => {
+            this.posts = data;
+          }).catch(error => {
+            console.error('获取帖子数据失败:', error);
+          });
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>游戏详情</title>
+  <link rel="stylesheet" href="./css/game_details.css">
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <div class="game-detail" v-if="details.name">
+    <h1>{{ details.name }}</h1>
+    <img :src="details.img" :alt="details.name">
+    <p>{{ details.description }}</p>
+    <p>{{ details.detail }}</p>
+  </div>
+  <div v-else>
+    <p>正在加载游戏详情...</p>
+  </div>
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    details: {}
+  },
+  methods: {
+    getGameIdFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id');
+    },
+    fetchGameData(gameId) {
+      fetch(`http://localhost:5000/game_details/${gameId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('服务器响应错误');
+          }
+          return response.json();
+        })
+        .then(data => {
+          this.details = data;
+        }).catch(error => {
+          console.error('获取游戏详情失败:', error);
+        });
+    }
+  },
+  mounted() {
+    const gameId = this.getGameIdFromUrl();
+    if (gameId) {
+      this.fetchGameData(gameId);
+    } else {
+      console.error('无法获取游戏ID');
+    }
+  },
+})
+</script>
+</body>
+</html>

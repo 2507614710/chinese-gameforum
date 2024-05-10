@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帖子详情</title>
+  <!-- 引入帖子详情页面的样式文件 -->
+  <link rel="stylesheet" href="./css/posts_details.css">
+  <!-- 引入Vue.js -->
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <!-- 显示帖子详细内容的容器 -->
+  <div class="post-detail" v-if="detail.title">
+    <!-- 帖子标题 -->
+    <h1>{{ detail.title }}</h1>
+    <!-- 帖子图片 -->
+    <img :src="detail.img" :alt="detail.title">
+    <!-- 帖子内容 -->
+    <p>{{ detail.content }}</p>
+    <!-- 作者信息 -->
+    <div class="post-author">
+      {{ detail.author }}
+    </div>
+    <!-- 发布日期 -->
+    <div class="post-date">
+      {{ detail.date }}
+    </div>
+  </div>
+  <!-- 加载状态显示 -->
+  <div v-else>
+    <p>正在加载帖子详情...</p>
+  </div>
+</div>
+
+<script>
+// 初始化Vue.js应用
+new Vue({
+  el: '#app',
+  data: {
+    detail: {}
+  },
+  methods: {
+    // 从URL中获取帖子ID的函数
+    getPostIdFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id');
+    },
+    // 根据帖子ID，从服务器获取帖子数据的函数
+    fetchPostData(postId) {
+      fetch(`http://localhost:5000/posts_details/${postId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('服务器响应错误');
+          }
+          return response.json();
+        })
+        .then(data => {
+          this.detail = data;
+        }).catch(error => {
+          console.error('获取帖子详情失败:', error);
+        });
+    }
+  },
+  // Vue实例挂载完毕后调用的钩子函数
+  mounted() {
+    const postId = this.getPostIdFromUrl();
+    if (postId) {
+      this.fetchPostData(postId);
+    } else {
+      console.error('无法获取帖子ID');
+    }
+  },
+})
+</script>
+</body>
+</html>

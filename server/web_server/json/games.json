@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "原神",
+    "img": "https://img2.baidu.com/it/u=3138422786,1233442086&fm=253&fmt=auto&app=138&f=JPEG?w=1422&h=800",
+    "description": "2020年米哈游开发的开放世界冒险游戏"
+  },
+  {
+    "id": 2,
+    "name": "王者荣耀",
+    "img": "https://img2.baidu.com/it/u=3255468112,2847340683&fm=253&fmt=auto&app=120&f=JPEG?w=888&h=500",
+    "description": "2015年腾讯天美发行的MOBA手游"
+  },
+  {
+    "id": 3,
+    "name": "蛋仔派对",
+    "img": "https://img2.baidu.com/it/u=2960266491,2815930062&fm=253&fmt=auto&app=138&f=JPEG?w=570&h=321",
+    "description": "网易研发的休闲竞技类手游"
+  },
+  {
+    "id": 4,
+    "name": "崩坏：星穹铁道",
+    "img": "https://img2.baidu.com/it/u=4270337985,565532600&fm=253&fmt=auto&app=138&f=JPEG?w=608&h=338",
+    "description": "2023年上海米哈游网络科技股份有限公司自研的银河冒险策略游戏"
+  }
+]

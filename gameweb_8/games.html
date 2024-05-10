@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>游戏</title>
+  <link rel="stylesheet" href="./css/games.css">
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 头部区域 -->
+    <header class="header">
+      <div class="logo">
+        <img src="./img/logo.png" alt="Logo">
+      </div>
+      <div class="title-container">
+        <h1>游戏</h1>
+        <span class="website-url">www.gamelogin.com</span>
+      </div>
+      <nav class="top-nav">
+        <a href="index.html">首页</a>
+        <a href="games.html">游戏</a>
+        <a href="forum.html">论坛</a>
+        <a href="user_login.html">登录</a>
+        <a href="contact.html">联系我们</a>
+      </nav>
+    </header>
+
+    
+    <!-- 三张游戏轮播图 -->
+    <section class="carousel" v-if="carouselImages.length" @click="toggleCarousel">
+      <div class="carousel-container">
+        <a :href="carouselImages[currentImage].link" target="_blank">
+          <img :src="carouselImages[currentImage].src" :alt="carouselImages[currentImage].alt" class="carousel-image">
+        </a>
+        <div class="carousel-controls">
+          <button class="carousel-control left" @click="prevImage">&#10094;</button>
+          <button class="carousel-control right" @click="nextImage">&#10095;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 游戏板块展示区 -->
+    <section class="game-boards">
+      <div class="board-item" v-for="game in games" :key="game.id">
+        <a :href="game.link">
+          <img :src="game.img" :alt="game.name">
+          <h3>{{ game.name }}</h3>
+        </a>
+      </div>
+    </section>
+
+    <!-- 页脚区 -->
+    <footer class="footer">
+      <p>版权所有 &copy; 2023 中文游戏论坛. 保留所有权利。</p>
+    </footer>
+  </div>
+
+  <script>
+    // Vue 代码
+    new Vue({
+        el: '#app',
+        data: {
+          games: [],
+          carouselImages: [
+            { src: 'https://img1.baidu.com/it/u=1179203911,2339601647&fm=253&fmt=auto&app=138&f=JPEG?w=888&h=500', alt: '暗区突围', link: 'https://aqtw.qq.com/' },
+            { src: 'https://img1.baidu.com/it/u=1413621236,2023573688&fm=253&fmt=auto&app=120&f=JPEG?w=1542&h=800', alt: '无畏契约', link: 'https://val.qq.com/main.html' },
+            { src: 'https://img2.baidu.com/it/u=2706159679,1578020201&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500', alt: '命运方舟', link: 'https://lostark.qq.com/' }
+          ],
+          currentImage: 0,
+          carouselInterval: null // 存放定时器ID
+        },
+        methods: {
+          nextImage() {
+            this.currentImage = (this.currentImage + 1) % this.carouselImages.length;
+          },
+          prevImage() {
+            this.currentImage = (this.currentImage - 1 + this.carouselImages.length) % this.carouselImages.length;
+          },
+          pauseCarousel() {
+            clearInterval(this.carouselInterval);
+            this.carouselInterval = null;
+          },
+          resumeCarousel() {
+            this.carouselInterval = setInterval(this.nextImage, 2000);
+          },
+          toggleCarousel() {
+            if (this.carouselInterval) {
+              this.pauseCarousel();
+            } else {
+              this.resumeCarousel();
+            }
+          }
+        },
+        mounted() {
+              this.resumeCarousel(); // 开始轮播
+              fetch('http://localhost:5000/game_boards')
+                .then(response => response.json())
+                .then(data => {
+                  this.games = data;
+                }).catch(error => {
+                  console.error('获取游戏数据失败:', error);
+                });
+            },
+          })
+  </script>
+</body>
+</html>

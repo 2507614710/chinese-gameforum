@@ -1,0 +1,19 @@
+[
+    {
+        "forum_name": "游戏讨论",
+        "userid": "user1",
+        "content": "这款游戏真是太好玩了！",
+        "date": "2023-05-04"
+    },
+    {
+        "forum_name": "游戏讨论",
+        "userid": "user1",
+        "content": "我觉得游戏平衡性有待提高",
+        "date": "2023-05-05"
+    },
+    {
+        "userid": "user2",
+        "title": "哈哈",
+        "content": "你好\n"
+    }
+]

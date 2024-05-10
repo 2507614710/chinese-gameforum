@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我们 - 游戏社区论坛</title>
+  <link rel="stylesheet" href="./css/contact.css">
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 头部区域，复用index.html的头部 -->
+    <header class="header">
+      <div class="logo">
+        <img src="./img/logo.png" alt="Logo">
+      </div>
+      <div class="title-container">
+        <h1>联系我们</h1>
+        <span class="website-url">www.gamelogin.com</span>
+      </div>
+      <nav class="top-nav">
+        <a href="index.html">首页</a>
+        <a href="games.html">游戏</a>
+        <a href="forum.html">论坛</a>
+        <a href="user_login.html">登录</a>
+        <a href="contact.html" class="active">联系我们</a>
+      </nav>
+    </header>
+
+    <!-- 中间的内容展示区域 -->
+    <section class="team-info">
+      <!-- Vue.js 会渲染团队信息到这里 -->
+      <div v-if="teamInfo">
+        <h2>我们的团队</h2>
+        <img :src="teamInfo.img" alt="团队图片">
+
+        <div v-for="member in teamInfo.members" class="member">
+          <h3>{{ member.name }}</h3>
+          <p>职位: {{ member.position }}</p>
+          <p>年龄: {{ member.age }}</p>
+          <p>技能: {{ member.skills }}</p>
+          <p>简介: {{ member.profile }}</p>
+        </div>
+
+        <h3>使命声明</h3>
+        <ul>
+          <li v-for="mission in teamInfo.mission">{{ mission }}</li>
+        </ul>
+
+        <h3>技术栈</h3>
+        <p>{{ teamInfo.technologies }}</p>
+
+        <h3>联系方式</h3>
+        <p>电邮: {{ teamInfo.contact.email }}</p>
+        <p>电话: {{ teamInfo.contact.phone }}</p>
+        <p>地址: {{ teamInfo.contact.address }}</p>
+      </div>
+    </section>
+
+    <!-- 页脚区，复用index.html的页脚 -->
+    <footer class="footer">
+      <p>版权所有 &copy; 2023 中文游戏论坛. 保留所有权利。</p>
+    </footer>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        teamInfo: null
+      },
+      mounted() {
+        fetch('http://localhost:5000/contact_info') // 调整为你的后端API地址
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok.');
+            }
+            return response.json();
+          })
+          .then(data => {
+            this.teamInfo = data.team_info; // 将获取的数据赋值给teamInfo
+          })
+          .catch(error => {
+            console.error('获取团队信息失败:', error);
+          });
+      }
+    })
+  </script>
+</body>
+</html>

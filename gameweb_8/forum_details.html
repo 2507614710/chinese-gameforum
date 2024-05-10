@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>论坛详情</title>
+  <link rel="stylesheet" href="./css/forum.css">
+  <script src="./js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="logo">
+        <img src="./img/logo.png" alt="Logo">
+      </div>
+      <div class="title-container">
+        <h1>联系我们</h1>
+        <span class="website-url">www.gamelogin.com</span>
+      </div>
+      <nav class="top-nav">
+        <a href="index.html">首页</a>
+        <a href="games.html">游戏</a>
+        <a href="forum.html">论坛</a>
+        <a href="user_login.html">登录</a>
+        <a href="contact.html" class="active">联系我们</a>
+      </nav>
+    </header>
+
+    <section class="forum-details">
+      <h2 v-if="posts.length > 0">{{ posts[0].forum_name }}</h2>
+
+      <div class="post-item" v-for="post in posts" :key="post.index">
+        <p>{{ post.userid }}</p>
+        <p>{{ post.content }}</p>
+        <p>{{ post.date }}</p>
+      </div>
+    </section>
+
+    <section class="forum-input">
+      <input v-model="newPostTitle" placeholder="输入帖子标题">
+      <textarea v-model="newPostContent" placeholder="输入帖子内容"></textarea>
+      <button @click="onSubmitUpdatePost">提交帖子</button>
+    </section>
+
+    <footer class="footer">
+      <p>版权所有 &copy; 2023 中文游戏论坛。保留所有权利。</p>
+    </footer>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        posts: [],
+        categoryId: null,
+        newPostTitle: '',
+        newPostContent: '',
+        userLoggedIn: false
+      },
+      mounted() {
+        this.checkLoginStatus();
+        const params = new URLSearchParams(window.location.search);
+        this.categoryId = params.get('id');
+        if (!this.categoryId) {
+          console.error('没有提供分类ID。');
+          return;
+        }
+        this.fetchPosts(this.categoryId);
+      },
+      methods: {
+        checkLoginStatus() {
+          fetch('http://localhost:5000/check_login', { credentials: 'include' })
+            .then(response => response.ok ? response.json() : Promise.reject())
+            .then(data => {
+              if (data.userid) {
+                this.userLoggedIn = true;
+              } else {
+                throw new Error('User not logged in');
+              }
+            })
+            .catch(error => {
+              console.error('登录状态检查失败:', error);
+              this.userLoggedIn = false;
+            });
+        },
+        fetchPosts(categoryId) {
+          fetch(`http://localhost:5000/forum_details/${categoryId}`)
+            .then(response => response.ok ? response.json() : Promise.reject())
+            .then(posts => this.posts = posts)
+            .catch(error => console.error('获取论坛分类详情失败:', error));
+        },
+        updatePost(forumId, postData) {
+          fetch(`http://localhost:5000/update_post/${forumId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(postData)
+          })
+            .then(response => response.ok ? response.json() : Promise.reject())
+            .then(data => console.log('帖子更新成功:', data))
+            .catch(error => console.error('更新帖子失败:', error));
+        },
+        onSubmitUpdatePost() {
+          if (!this.newPostTitle.trim() || !this.newPostContent.trim()) {
+            return console.error('帖子标题和内容不能为空。');
+          }
+          const newPostData = {
+            title: this.newPostTitle,
+            content: this.newPostContent
+          };
+          this.updatePost(this.categoryId, newPostData);
+          this.newPostTitle = '';
+          this.newPostContent = '';
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>
